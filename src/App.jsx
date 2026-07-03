@@ -1377,7 +1377,7 @@ export default function Portfolio() {
         </div>
         <div style={{ display: "flex", gap: 8 }}>
           <button onClick={() => setDark((d) => !d)} style={{ ...btnBase, padding: 8 }} aria-label="Toggle dark mode">{dark ? <Sun size={15} /> : <Moon size={15} />}</button>
-          <button onClick={() => setEditing(true)} style={{ ...btnBase, padding: "8px 12px" }}><Pencil size={14} /> Edit</button>
+          {/* <button onClick={() => setEditing(true)} style={{ ...btnBase, padding: "8px 12px" }}><Pencil size={14} /> Edit</button> */}
         </div>
       </nav>
 
