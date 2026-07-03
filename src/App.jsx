@@ -293,43 +293,30 @@ function TechLogo({ name, size = 22, iconKey, customSrc }) {
 }
 
 function useLocalData() {
-  const [data, setData] = useState(defaultData);
-  const [loaded, setLoaded] = useState(false);
+  const [data, setData] = useState(() => {
+    const saved = localStorage.getItem("portfolioData");
 
-  useEffect(() => {
-    let mounted = true;
-    (async () => {
+    if (saved) {
       try {
-        const res = await window.storage.get(STORAGE_KEY, false);
-        if (mounted && res && res.value) {
-          const parsed = JSON.parse(res.value);
-          setData({ ...defaultData, ...parsed });
-        }
-      } catch (e) {
-        // first run
-      } finally {
-        if (mounted) setLoaded(true);
+        return JSON.parse(saved);
+      } catch {
+        return defaultData;
       }
-    })();
-    return () => { mounted = false; };
-  }, []);
-
-  const persist = async (next) => {
-    setData(next);
-    try {
-      await window.storage.set(STORAGE_KEY, JSON.stringify(next), false);
-    } catch (e) {
-      console.error("save failed", e);
     }
+
+    return defaultData;
+  });
+
+  const [loaded, setLoaded] = useState(true);
+
+  const persist = (next) => {
+    setData(next);
+    localStorage.setItem("portfolioData", JSON.stringify(next));
   };
 
-  const reset = async () => {
+  const reset = () => {
     setData(defaultData);
-    try {
-      await window.storage.set(STORAGE_KEY, JSON.stringify(defaultData), false);
-    } catch (e) {
-      console.error("reset failed", e);
-    }
+    localStorage.setItem("portfolioData", JSON.stringify(defaultData));
   };
 
   return { data, persist, reset, loaded };
