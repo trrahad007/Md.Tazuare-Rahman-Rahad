@@ -557,11 +557,7 @@ const PORTFOLIO_DATA = {
             <button class="btn" style="padding:10px 20px;" onclick="viewResume()">👁 View Resume</button>
             <button class="btn btn-icon" onclick="downloadResume()" aria-label="Download resume">⬇</button>
           </div>
-          <div style="display:flex; gap:14px;">
-            ${d.github ? `<a href="${esc(d.github)}" target="_blank" rel="noreferrer" style="color:var(--muted);">GitHub</a>` : ''}
-            ${d.linkedin ? `<a href="${esc(d.linkedin)}" target="_blank" rel="noreferrer" style="color:var(--muted);">LinkedIn</a>` : ''}
-            <a href="mailto:${esc(d.email)}" style="color:var(--muted);">Email</a>
-          </div>
+         
         </div>
         <div class="card" style="text-align:center; position:relative; border-radius:18px; padding:24px;">
           <span style="position:absolute; top:14px; right:14px; background:var(--bg); border:1px solid var(--border); border-radius:20px; padding:4px 12px; font-size:11px; font-weight:700; color:var(--accent);">${esc(d.experienceBadge)}</span>
